@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Shield, Brain, Zap, Users, TrendingUp, CheckCircle } from 'lucide-react'
+import { useLanguage } from './contexts/LanguageContext'
 
 export default function Home() {
+  const { t } = useLanguage()
   const features = [
     {
       icon: Shield,

@@ -4,16 +4,19 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Menu, X, Shield, Brain } from 'lucide-react'
+import { useLanguage } from '@/app/contexts/LanguageContext'
+import LanguageSwitcher from './LanguageSwitcher'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useLanguage()
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Techniques', href: '/techniques' },
-    { name: 'Products', href: '/products' },
-    { name: 'Cases', href: '/cases' },
-    { name: 'Contact', href: '/contact' },
+    { name: t('nav.home'), href: '/' },
+    { name: t('nav.techniques'), href: '/techniques' },
+    { name: t('nav.products'), href: '/products' },
+    { name: t('nav.cases'), href: '/cases' },
+    { name: t('nav.contact'), href: '/contact' },
   ]
 
   return (
@@ -44,8 +47,9 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
+            <LanguageSwitcher />
             <button className="btn-primary">
-              Get Started
+              {t('nav.getStarted')}
             </button>
           </div>
 
