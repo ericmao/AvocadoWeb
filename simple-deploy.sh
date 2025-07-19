@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Remote Deployment Script for Avocado.ai Website
+# Simple Remote Deployment Script for Avocado.ai Website
 # Deploys to Ubuntu server via SSH
 
 set -e
@@ -9,7 +9,6 @@ set -e
 SERVER_IP="123.193.212.115"
 SSH_USER="ubuntu"
 SSH_PASS="ubuntu"
-DOMAIN="123.193.212.115"  # Using IP as domain for now
 
 # Colors
 GREEN='\033[0;32m'
@@ -46,7 +45,7 @@ if ! command -v sshpass &> /dev/null; then
     fi
 fi
 
-print_status "Starting remote deployment to $SERVER_IP..."
+print_status "Starting simple deployment to $SERVER_IP..."
 
 # Test SSH connection
 print_status "Testing SSH connection..."
@@ -57,80 +56,57 @@ else
     exit 1
 fi
 
-# Create deployment script for remote server
-print_status "Creating remote deployment script..."
-cat > remote-setup.sh << 'EOF'
-#!/bin/bash
+# Execute deployment commands on remote server
+print_status "Executing deployment commands on server..."
 
-# Remote setup script for Ubuntu server
-set -e
+sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no "$SSH_USER@$SERVER_IP" << 'REMOTE_COMMANDS'
 
-echo "🚀 Setting up Avocado.ai Website on Ubuntu Server..."
-
-# Colors
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-YELLOW='\033[1;33m'
-NC='\033[0m'
-
-print_status() {
-    echo -e "${BLUE}[INFO]${NC} $1"
-}
-
-print_success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
-}
+echo "🚀 Starting Avocado.ai Website Deployment..."
 
 # Update system
-print_status "Updating system packages..."
-echo "ubuntu" | sudo -S apt update && echo "ubuntu" | sudo -S apt upgrade -y
-
-# Install essential packages
-print_status "Installing essential packages..."
-echo "ubuntu" | sudo -S apt install -y curl wget git unzip software-properties-common apt-transport-https ca-certificates gnupg lsb-release
+echo "Updating system packages..."
+sudo apt update && sudo apt upgrade -y
 
 # Install Docker
-print_status "Installing Docker..."
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | echo "ubuntu" | sudo -S gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | echo "ubuntu" | sudo -S tee /etc/apt/sources.list.d/docker.list > /dev/null
-echo "ubuntu" | sudo -S apt update
-echo "ubuntu" | sudo -S apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+echo "Installing Docker..."
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # Add user to docker group
-echo "ubuntu" | sudo -S usermod -aG docker $USER
+sudo usermod -aG docker $USER
 
-# Install Node.js 18.x
-print_status "Installing Node.js 18.x..."
-curl -fsSL https://deb.nodesource.com/setup_18.x | echo "ubuntu" | sudo -S bash -
-echo "ubuntu" | sudo -S apt install -y nodejs
+# Install Node.js
+echo "Installing Node.js..."
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
 
 # Install PostgreSQL
-print_status "Installing PostgreSQL..."
-echo "ubuntu" | sudo -S apt install -y postgresql postgresql-contrib
-
-# Start and enable PostgreSQL
-echo "ubuntu" | sudo -S systemctl start postgresql
-echo "ubuntu" | sudo -S systemctl enable postgresql
+echo "Installing PostgreSQL..."
+sudo apt install -y postgresql postgresql-contrib
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
 
 # Create database and user
-print_status "Setting up PostgreSQL database..."
-echo "ubuntu" | sudo -S -u postgres psql -c "CREATE DATABASE avocado_db;" 2>/dev/null || true
-echo "ubuntu" | sudo -S -u postgres psql -c "CREATE USER avocado_user WITH PASSWORD 'avocado_password';" 2>/dev/null || true
-echo "ubuntu" | sudo -S -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE avocado_db TO avocado_user;" 2>/dev/null || true
+echo "Setting up database..."
+sudo -u postgres psql -c "CREATE DATABASE avocado_db;" 2>/dev/null || true
+sudo -u postgres psql -c "CREATE USER avocado_user WITH PASSWORD 'avocado_password';" 2>/dev/null || true
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE avocado_db TO avocado_user;" 2>/dev/null || true
 
 # Create application directory
-print_status "Setting up application directory..."
-echo "ubuntu" | sudo -S mkdir -p /opt/avocado-ai
-echo "ubuntu" | sudo -S chown $USER:$USER /opt/avocado-ai
+echo "Setting up application directory..."
+sudo mkdir -p /opt/avocado-ai
+sudo chown $USER:$USER /opt/avocado-ai
 
 # Clone repository
-print_status "Cloning repository..."
+echo "Cloning repository..."
 cd /opt
 git clone https://github.com/ericmao/AvocadoWeb.git avocado-ai
 cd avocado-ai
 
 # Create environment file
-print_status "Setting up environment variables..."
+echo "Setting up environment variables..."
 cat > .env << 'ENVEOF'
 # Database Configuration
 DATABASE_URL=postgresql://avocado_user:avocado_password@localhost:5432/avocado_db
@@ -150,7 +126,7 @@ ADMIN_PASSWORD=admin
 ENVEOF
 
 # Create production Docker Compose file
-print_status "Creating production Docker Compose configuration..."
+echo "Creating Docker Compose configuration..."
 cat > docker-compose.prod.yml << 'COMPOSEEOF'
 version: '3.8'
 
@@ -228,7 +204,7 @@ networks:
 COMPOSEEOF
 
 # Create Nginx configuration
-print_status "Creating Nginx configuration..."
+echo "Creating Nginx configuration..."
 cat > nginx.conf << 'NGINXEOF'
 events {
     worker_connections 1024;
@@ -297,7 +273,7 @@ http {
 NGINXEOF
 
 # Create backend Dockerfile
-print_status "Creating backend Dockerfile..."
+echo "Creating backend Dockerfile..."
 cat > backend/Dockerfile << 'BACKENDOF'
 FROM python:3.11-slim
 
@@ -324,7 +300,7 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 BACKENDOF
 
 # Create frontend Dockerfile
-print_status "Creating frontend Dockerfile..."
+echo "Creating frontend Dockerfile..."
 cat > frontend/Dockerfile << 'FRONTENDOF'
 FROM node:18-alpine
 
@@ -350,8 +326,8 @@ CMD ["npm", "start"]
 FRONTENDOF
 
 # Create systemd service
-print_status "Creating systemd service..."
-echo "ubuntu" | sudo -S tee /etc/systemd/system/avocado-ai.service > /dev/null << 'SERVICEEOF'
+echo "Creating systemd service..."
+sudo tee /etc/systemd/system/avocado-ai.service > /dev/null << 'SERVICEEOF'
 [Unit]
 Description=Avocado.ai Website
 Requires=docker.service
@@ -370,41 +346,23 @@ WantedBy=multi-user.target
 SERVICEEOF
 
 # Enable and start service
-echo "ubuntu" | sudo -S systemctl enable avocado-ai.service
-echo "ubuntu" | sudo -S systemctl start avocado-ai.service
+sudo systemctl enable avocado-ai.service
+sudo systemctl start avocado-ai.service
 
 # Setup firewall
-print_status "Setting up firewall..."
-echo "ubuntu" | sudo -S apt install -y ufw
-echo "ubuntu" | sudo -S ufw allow ssh
-echo "ubuntu" | sudo -S ufw allow 80
-echo "ubuntu" | sudo -S ufw allow 443
-echo "ubuntu" | sudo -S ufw --force enable
+echo "Setting up firewall..."
+sudo apt install -y ufw
+sudo ufw allow ssh
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw --force enable
 
-print_success "Remote setup completed!"
-echo
-echo "📋 Deployment Status:"
-echo "   - Website: http://123.193.212.115"
-echo "   - Admin: http://123.193.212.115/admin"
-echo "   - API: http://123.193.212.115/api"
-echo
-echo "🔐 Default credentials:"
-echo "   - Admin: admin / admin"
-echo "   - Database: avocado_user / avocado_password"
-echo
-echo "📊 Monitor commands:"
-echo "   - Check status: sudo systemctl status avocado-ai.service"
-echo "   - View logs: docker logs avocado_backend"
-echo "   - Check containers: docker ps"
-EOF
+echo "Deployment completed!"
+echo "Website: http://123.193.212.115"
+echo "Admin: http://123.193.212.115/admin"
+echo "Default credentials: admin / admin"
 
-# Copy setup script to server
-print_status "Copying setup script to server..."
-sshpass -p "$SSH_PASS" scp -o StrictHostKeyChecking=no remote-setup.sh "$SSH_USER@$SERVER_IP:/tmp/"
-
-# Execute setup script on server
-print_status "Executing setup script on server..."
-sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no "$SSH_USER@$SERVER_IP" "chmod +x /tmp/remote-setup.sh && /tmp/remote-setup.sh"
+REMOTE_COMMANDS
 
 # Wait for services to start
 print_status "Waiting for services to start (this may take a few minutes)..."
@@ -418,10 +376,7 @@ else
     print_warning "Website may still be starting up. Please wait a few more minutes."
 fi
 
-# Clean up local files
-rm -f remote-setup.sh
-
-print_success "Remote deployment completed!"
+print_success "Simple deployment completed!"
 echo
 echo "🌐 Your website is now available at:"
 echo "   - Main site: http://$SERVER_IP"
