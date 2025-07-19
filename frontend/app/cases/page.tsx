@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { Shield, Brain, TrendingUp, Users, Globe, Building } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Cases() {
+  const { t } = useLanguage()
   const caseStudies = [
     {
       title: 'Fortune 500 Financial Institution',
@@ -120,10 +122,10 @@ export default function Cases() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Success Stories
+              {t('cases.hero.title')}
             </h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
-              Discover how organizations across industries are protecting their digital assets with Avocado.ai solutions.
+              {t('cases.hero.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -139,10 +141,10 @@ export default function Cases() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Case Studies
+              {t('cases.caseStudies.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real-world examples of how our solutions have protected organizations from cyber threats.
+              {t('cases.caseStudies.subtitle')}
             </p>
           </motion.div>
 
@@ -204,10 +206,10 @@ export default function Cases() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              What Our Clients Say
+              {t('cases.testimonials.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Hear directly from the security leaders who trust Avocado.ai with their organization's protection.
+              {t('cases.testimonials.subtitle')}
             </p>
           </motion.div>
 

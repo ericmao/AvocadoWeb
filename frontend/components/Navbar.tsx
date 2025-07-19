@@ -16,6 +16,8 @@ const Navbar = () => {
     { name: t('nav.techniques'), href: '/techniques' },
     { name: t('nav.products'), href: '/products' },
     { name: t('nav.cases'), href: '/cases' },
+    { name: t('nav.careers'), href: '/careers' },
+    { name: t('nav.news'), href: '/news' },
     { name: t('nav.contact'), href: '/contact' },
   ]
 

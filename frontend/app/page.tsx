@@ -10,31 +10,31 @@ export default function Home() {
   const features = [
     {
       icon: Shield,
-      title: 'Advanced Cybersecurity',
-      description: 'State-of-the-art security solutions protecting your digital assets from evolving threats.',
+      title: t('home.features.advancedSecurity'),
+      description: t('home.features.advancedSecurityDesc'),
     },
     {
       icon: Brain,
-      title: 'AI-Powered Intelligence',
-      description: 'Cutting-edge artificial intelligence that learns and adapts to new security challenges.',
+      title: t('home.features.aiIntelligence'),
+      description: t('home.features.aiIntelligenceDesc'),
     },
     {
       icon: Zap,
-      title: 'Real-time Protection',
-      description: 'Instant threat detection and response with minimal latency and maximum efficiency.',
+      title: t('home.features.realTimeProtection'),
+      description: t('home.features.realTimeProtectionDesc'),
     },
     {
       icon: Users,
-      title: 'Enterprise Solutions',
-      description: 'Scalable security solutions designed for organizations of all sizes.',
+      title: t('home.features.enterpriseSolutions'),
+      description: t('home.features.enterpriseSolutionsDesc'),
     },
   ]
 
   const stats = [
-    { number: '99.9%', label: 'Threat Detection Rate' },
-    { number: '24/7', label: 'Security Monitoring' },
-    { number: '500+', label: 'Enterprise Clients' },
-    { number: '50M+', label: 'Threats Blocked' },
+    { number: '99.9%', label: t('home.stats.threatDetection') },
+    { number: '24/7', label: t('home.stats.monitoring') },
+    { number: '500+', label: t('home.stats.clients') },
+    { number: '50M+', label: t('home.stats.threatsBlocked') },
   ]
 
   return (
@@ -49,19 +49,18 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-                Securing the Future with{' '}
+                {t('home.hero.title')}{' '}
                 <span className="text-avocado-600">AI</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
-                Avocado.ai combines cutting-edge cybersecurity with artificial intelligence to protect your digital world. 
-                We provide enterprise-grade security solutions that adapt and evolve with emerging threats.
+                {t('home.hero.subtitle')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/products" className="btn-primary text-center">
-                  Explore Products
+                  {t('home.hero.exploreProducts')}
                 </Link>
                 <Link href="/contact" className="btn-secondary text-center">
-                  Get Started
+                  {t('home.hero.getStarted')}
                 </Link>
               </div>
             </motion.div>
@@ -107,10 +106,10 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Avocado.ai?
+              {t('home.features.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our comprehensive approach combines the latest in cybersecurity technology with artificial intelligence to provide unmatched protection.
+              {t('home.features.subtitle')}
             </p>
           </motion.div>
 
@@ -146,10 +145,10 @@ export default function Home() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Trusted by Industry Leaders
+              {t('home.stats.title')}
             </h2>
             <p className="text-xl text-gray-300">
-              Our track record speaks for itself
+              {t('home.stats.subtitle')}
             </p>
           </motion.div>
 
@@ -183,17 +182,17 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Secure Your Future?
+              {t('home.cta.title')}
             </h2>
             <p className="text-xl mb-8 opacity-90">
-              Join hundreds of enterprises that trust Avocado.ai with their cybersecurity needs.
+              {t('home.cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact" className="bg-white text-avocado-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-                Get Started Today
+                {t('home.cta.getStartedToday')}
               </Link>
               <Link href="/cases" className="border-2 border-white text-white hover:bg-white hover:text-avocado-600 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-                View Case Studies
+                {t('home.cta.viewCaseStudies')}
               </Link>
             </div>
           </motion.div>

@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { Shield, Brain, Zap, Lock, Eye, Cpu, Users, Globe } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Products() {
+  const { t } = useLanguage()
   const products = [
     {
       icon: Shield,
@@ -87,10 +89,10 @@ export default function Products() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Our Products & Solutions
+              {t('products.hero.title')}
             </h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
-              Discover our comprehensive suite of cybersecurity and AI products designed to protect your organization.
+              {t('products.hero.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -106,10 +108,10 @@ export default function Products() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Core Products
+              {t('products.coreProducts.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our flagship products combine cutting-edge AI with proven cybersecurity methodologies.
+              {t('products.coreProducts.subtitle')}
             </p>
           </motion.div>
 
@@ -161,10 +163,10 @@ export default function Products() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Enterprise Solutions
+              {t('products.enterpriseSolutions.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Tailored solutions designed to meet the specific needs of different organizations.
+              {t('products.enterpriseSolutions.subtitle')}
             </p>
           </motion.div>
 
@@ -207,17 +209,17 @@ export default function Products() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Get Started?
+              {t('products.pricingCTA.title')}
             </h2>
             <p className="text-xl mb-8 opacity-90">
-              Contact our sales team for a personalized demo and pricing quote.
+              {t('products.pricingCTA.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-avocado-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-                Request Demo
+                {t('products.pricingCTA.requestDemo')}
               </button>
               <button className="border-2 border-white text-white hover:bg-white hover:text-avocado-600 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-                Contact Sales
+                {t('products.pricingCTA.contactSales')}
               </button>
             </div>
           </motion.div>

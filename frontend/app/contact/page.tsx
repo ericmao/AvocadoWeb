@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Clock, MessageSquare } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Contact() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,25 +32,25 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      title: 'Email',
+      title: t('contact.contactInfo.email'),
       details: 'info@avocado.ai',
       description: 'Send us an email anytime'
     },
     {
       icon: Phone,
-      title: 'Phone',
+      title: t('contact.contactInfo.phone'),
       details: '+1 (555) 123-4567',
       description: 'Mon-Fri from 8am to 6pm'
     },
     {
       icon: MapPin,
-      title: 'Office',
+      title: t('contact.contactInfo.office'),
       details: 'San Francisco, CA',
       description: 'Visit our headquarters'
     },
     {
       icon: Clock,
-      title: 'Support',
+      title: t('contact.contactInfo.support'),
       details: '24/7 Available',
       description: 'Round-the-clock assistance'
     }
@@ -65,10 +67,10 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Get in Touch
+              {t('contact.hero.title')}
             </h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
-              Ready to secure your organization? Let's discuss how Avocado.ai can protect your digital assets.
+              {t('contact.hero.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -85,13 +87,13 @@ export default function Contact() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Send us a Message
+                {t('contact.form.title')}
               </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
+                      {t('contact.form.fullName')} *
                     </label>
                     <input
                       type="text"
@@ -106,7 +108,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
+                      {t('contact.form.email')} *
                     </label>
                     <input
                       type="email"
@@ -124,7 +126,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                      Company
+                      {t('contact.form.company')}
                     </label>
                     <input
                       type="text"
@@ -138,7 +140,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number
+                      {t('contact.form.phone')}
                     </label>
                     <input
                       type="tel"
@@ -154,7 +156,7 @@ export default function Contact() {
 
                 <div>
                   <label htmlFor="interest" className="block text-sm font-medium text-gray-700 mb-2">
-                    I'm interested in *
+                    {t('contact.form.interest')} *
                   </label>
                   <select
                     id="interest"
@@ -164,18 +166,18 @@ export default function Contact() {
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-avocado-500 focus:border-transparent"
                   >
-                    <option value="">Select an option</option>
-                    <option value="demo">Product Demo</option>
-                    <option value="pricing">Pricing Information</option>
-                    <option value="partnership">Partnership Opportunities</option>
-                    <option value="support">Technical Support</option>
-                    <option value="other">Other</option>
+                    <option value="">{t('contact.form.selectOption')}</option>
+                    <option value="demo">{t('contact.form.demo')}</option>
+                    <option value="pricing">{t('contact.form.pricing')}</option>
+                    <option value="partnership">{t('contact.form.partnership')}</option>
+                    <option value="support">{t('contact.form.support')}</option>
+                    <option value="other">{t('contact.form.other')}</option>
                   </select>
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Message *
+                    {t('contact.form.message')} *
                   </label>
                   <textarea
                     id="message"
@@ -193,7 +195,7 @@ export default function Contact() {
                   type="submit"
                   className="w-full btn-primary text-lg py-4"
                 >
-                  Send Message
+                  {t('contact.form.sendMessage')}
                 </button>
               </form>
             </motion.div>
@@ -205,7 +207,7 @@ export default function Contact() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Contact Information
+                {t('contact.contactInfo.title')}
               </h2>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
@@ -237,20 +239,20 @@ export default function Contact() {
               {/* Office Hours */}
               <div className="mt-8 p-6 bg-white rounded-lg shadow-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  Office Hours
+                  {t('contact.officeHours.title')}
                 </h3>
                 <div className="space-y-2 text-sm text-gray-600">
                   <div className="flex justify-between">
-                    <span>Monday - Friday</span>
-                    <span>8:00 AM - 6:00 PM PST</span>
+                    <span>{t('contact.officeHours.monday')}</span>
+                    <span>{t('contact.officeHours.mondayHours')}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Saturday</span>
-                    <span>9:00 AM - 2:00 PM PST</span>
+                    <span>{t('contact.officeHours.saturday')}</span>
+                    <span>{t('contact.officeHours.saturdayHours')}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Sunday</span>
-                    <span>Closed</span>
+                    <span>{t('contact.officeHours.sunday')}</span>
+                    <span>{t('contact.officeHours.sundayClosed')}</span>
                   </div>
                 </div>
               </div>
@@ -269,30 +271,30 @@ export default function Contact() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Frequently Asked Questions
+              {t('contact.faq.title')}
             </h2>
             <p className="text-xl text-gray-600">
-              Find answers to common questions about our services
+              {t('contact.faq.subtitle')}
             </p>
           </motion.div>
 
           <div className="space-y-6">
             {[
               {
-                question: 'How quickly can you deploy your security solutions?',
-                answer: 'Our cloud-based solutions can be deployed within 24-48 hours, depending on your infrastructure requirements and customization needs.'
+                question: t('contact.faq.question1'),
+                answer: t('contact.faq.answer1')
               },
               {
-                question: 'Do you offer 24/7 support?',
-                answer: 'Yes, we provide round-the-clock support for all our enterprise clients, including emergency response and technical assistance.'
+                question: t('contact.faq.question2'),
+                answer: t('contact.faq.answer2')
               },
               {
-                question: 'What industries do you specialize in?',
-                answer: 'We serve clients across all industries, with particular expertise in financial services, healthcare, government, and technology sectors.'
+                question: t('contact.faq.question3'),
+                answer: t('contact.faq.answer3')
               },
               {
-                question: 'Can you integrate with our existing security tools?',
-                answer: 'Absolutely. Our solutions are designed to integrate seamlessly with your existing security infrastructure and tools.'
+                question: t('contact.faq.question4'),
+                answer: t('contact.faq.answer4')
               }
             ].map((faq, index) => (
               <motion.div
@@ -323,17 +325,17 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Get Started?
+              {t('contact.cta.title')}
             </h2>
             <p className="text-xl mb-8 opacity-90">
-              Join hundreds of organizations that trust Avocado.ai with their cybersecurity needs.
+              {t('contact.cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-avocado-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-                Schedule a Demo
+                {t('contact.cta.scheduleDemo')}
               </button>
               <button className="border-2 border-white text-white hover:bg-white hover:text-avocado-600 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-                Download Brochure
+                {t('contact.cta.downloadBrochure')}
               </button>
             </div>
           </motion.div>

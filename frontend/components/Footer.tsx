@@ -2,8 +2,11 @@
 
 import Link from 'next/link'
 import { Shield, Brain, Mail, Phone, MapPin } from 'lucide-react'
+import { useLanguage } from '../app/contexts/LanguageContext'
 
 const Footer = () => {
+  const { t } = useLanguage()
+  
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto section-padding">
@@ -16,7 +19,7 @@ const Footer = () => {
               <span className="text-xl font-bold">Avocado.ai</span>
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
-              Leading cybersecurity and AI company providing innovative solutions for enterprise security and artificial intelligence.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -36,26 +39,26 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/techniques" className="text-gray-300 hover:text-white transition-colors">
-                  Techniques
+                  {t('nav.techniques')}
                 </Link>
               </li>
               <li>
                 <Link href="/products" className="text-gray-300 hover:text-white transition-colors">
-                  Products
+                  {t('nav.products')}
                 </Link>
               </li>
               <li>
                 <Link href="/cases" className="text-gray-300 hover:text-white transition-colors">
-                  Cases
+                  {t('nav.cases')}
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
-                  Contact
+                  {t('nav.contact')}
                 </Link>
               </li>
             </ul>
@@ -63,7 +66,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.contact')}</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-avocado-400" />
@@ -83,7 +86,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 Avocado.ai. All rights reserved.
+            {t('footer.copyright')}
           </p>
         </div>
       </div>

@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { Shield, Brain, Zap, Lock, Eye, Cpu, Network, Database } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Techniques() {
+  const { t } = useLanguage()
   const techniques = [
     {
       icon: Brain,
@@ -69,10 +71,10 @@ export default function Techniques() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Our Advanced Techniques
+              {t('techniques.hero.title')}
             </h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
-              Discover the cutting-edge technologies and methodologies that power our cybersecurity and AI solutions.
+              {t('techniques.hero.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -88,10 +90,10 @@ export default function Techniques() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Core Technologies
+              {t('techniques.coreTechnologies.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our comprehensive suite of technologies combines the latest in cybersecurity with artificial intelligence.
+              {t('techniques.coreTechnologies.subtitle')}
             </p>
           </motion.div>
 
@@ -135,10 +137,10 @@ export default function Techniques() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Technology Stack
+              {t('techniques.technologyStack.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Built with modern, scalable technologies that ensure reliability and performance.
+              {t('techniques.technologyStack.subtitle')}
             </p>
           </motion.div>
 
@@ -173,10 +175,10 @@ export default function Techniques() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Our Development Process
+              {t('techniques.developmentProcess.title')}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              A systematic approach to developing and deploying secure AI solutions.
+              {t('techniques.developmentProcess.subtitle')}
             </p>
           </motion.div>
 

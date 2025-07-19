@@ -1,57 +1,18 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, ForeignKey, ARRAY
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
-from .database import Base
+from datetime import datetime
+
+Base = declarative_base()
 
 class User(Base):
     __tablename__ = "users"
     
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True)
     username = Column(String, unique=True, index=True)
+    email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
-    is_admin = Column(Boolean, default=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-
-class Product(Base):
-    __tablename__ = "products"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    category = Column(String)
-    description = Column(Text)
-    features = Column(Text)  # JSON string
-    price = Column(String)
-    is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-
-class CaseStudy(Base):
-    __tablename__ = "case_studies"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
-    industry = Column(String)
-    challenge = Column(Text)
-    solution = Column(Text)
-    results = Column(Text)  # JSON string
-    is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-
-class Technique(Base):
-    __tablename__ = "techniques"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    description = Column(Text)
-    features = Column(Text)  # JSON string
-    category = Column(String)
-    is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
 class Contact(Base):
     __tablename__ = "contacts"
@@ -63,6 +24,59 @@ class Contact(Base):
     phone = Column(String)
     message = Column(Text)
     interest = Column(String)
-    is_processed = Column(Boolean, default=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now()) 
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class Job(Base):
+    __tablename__ = "jobs"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, nullable=False)
+    department = Column(String, nullable=False)
+    location = Column(String, nullable=False)
+    type = Column(String, nullable=False)  # Full-time, Part-time, Contract
+    salary = Column(String, nullable=False)
+    description = Column(Text, nullable=False)
+    requirements = Column(ARRAY(String), nullable=False)
+    benefits = Column(ARRAY(String), nullable=False)
+    posted_date = Column(DateTime, default=datetime.utcnow)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class News(Base):
+    __tablename__ = "news"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, nullable=False)
+    content = Column(Text, nullable=False)
+    category = Column(String, nullable=False)  # Product Launch, Company News, Industry Update
+    published_date = Column(DateTime, default=datetime.utcnow)
+    is_published = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class Case(Base):
+    __tablename__ = "cases"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, nullable=False)
+    industry = Column(String, nullable=False)
+    challenge = Column(Text, nullable=False)
+    solution = Column(Text, nullable=False)
+    results = Column(ARRAY(String), nullable=False)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class Product(Base):
+    __tablename__ = "products"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    category = Column(String, nullable=False)
+    description = Column(Text, nullable=False)
+    features = Column(ARRAY(String), nullable=False)
+    price = Column(String, nullable=False)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow) 

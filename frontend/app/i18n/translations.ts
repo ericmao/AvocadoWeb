@@ -6,6 +6,8 @@ export const translations = {
       techniques: 'Techniques',
       products: 'Products',
       cases: 'Cases',
+      careers: 'Careers',
+      news: 'News',
       contact: 'Contact',
       getStarted: 'Get Started'
     },
@@ -141,16 +143,91 @@ export const translations = {
         email: 'Email',
         phone: 'Phone',
         office: 'Office',
-        support: 'Support',
-        officeHours: 'Office Hours',
-        mondayFriday: 'Monday - Friday',
+        support: 'Support'
+      },
+      officeHours: {
+        title: 'Office Hours',
+        monday: 'Monday - Friday',
+        mondayHours: '8:00 AM - 6:00 PM PST',
         saturday: 'Saturday',
+        saturdayHours: '9:00 AM - 2:00 PM PST',
         sunday: 'Sunday',
-        closed: 'Closed'
+        sundayClosed: 'Closed'
       },
       faq: {
         title: 'Frequently Asked Questions',
-        subtitle: 'Find answers to common questions about our services'
+        subtitle: 'Find answers to common questions about our services',
+        question1: 'How quickly can you deploy your security solutions?',
+        answer1: 'Our cloud-based solutions can be deployed within 24-48 hours, depending on your infrastructure requirements and customization needs.',
+        question2: 'Do you offer 24/7 support?',
+        answer2: 'Yes, we provide round-the-clock support for all our enterprise clients, including emergency response and technical assistance.',
+        question3: 'What industries do you specialize in?',
+        answer3: 'We serve clients across all industries, with particular expertise in financial services, healthcare, government, and technology sectors.',
+        question4: 'Can you integrate with our existing security tools?',
+        answer4: 'Absolutely. Our solutions are designed to integrate seamlessly with your existing security infrastructure and tools.'
+      },
+      cta: {
+        title: 'Ready to Get Started?',
+        subtitle: 'Join hundreds of organizations that trust Avocado.ai with their cybersecurity needs.',
+        scheduleDemo: 'Schedule a Demo',
+        downloadBrochure: 'Download Brochure'
+      }
+    },
+    
+    // Careers page
+    careers: {
+      hero: {
+        title: 'Join Our Team',
+        subtitle: 'Help us shape the future of AI-powered cybersecurity. Join a team of passionate professionals dedicated to protecting digital assets worldwide.'
+      },
+      whyJoin: {
+        title: 'Why Join Avocado.ai?',
+        subtitle: 'Be part of a team that\'s revolutionizing cybersecurity with artificial intelligence.',
+        learning: {
+          title: 'Continuous Learning',
+          description: 'Access to cutting-edge technologies and opportunities for professional development.'
+        },
+        culture: {
+          title: 'Inclusive Culture',
+          description: 'Work in a collaborative environment that values diversity and innovation.'
+        },
+        impact: {
+          title: 'Global Impact',
+          description: 'Make a difference by protecting organizations worldwide from cyber threats.'
+        }
+      },
+      openPositions: {
+        title: 'Open Positions',
+        subtitle: 'Explore opportunities to join our growing team of cybersecurity experts.'
+      },
+      applyNow: 'Apply Now',
+      cta: {
+        title: 'Ready to Join Us?',
+        subtitle: 'Don\'t see a position that fits? We\'re always looking for talented individuals.',
+        contactUs: 'Contact Us',
+        sendEmail: 'Send Email'
+      }
+    },
+    
+    // News page
+    news: {
+      hero: {
+        title: 'Latest News & Updates',
+        subtitle: 'Stay informed about our latest developments, product launches, and industry insights.'
+      },
+      categories: {
+        title: 'News Categories'
+      },
+      readMore: 'Read More',
+      noNews: {
+        title: 'No News Found',
+        subtitle: 'No news articles match your current filter. Please try a different category.'
+      },
+      newsletter: {
+        title: 'Stay Updated',
+        subtitle: 'Subscribe to our newsletter for the latest news and updates.',
+        placeholder: 'Enter your email address',
+        subscribe: 'Subscribe'
       }
     },
     
@@ -170,6 +247,8 @@ export const translations = {
       techniques: '技術',
       products: '產品',
       cases: '案例',
+      careers: '招募',
+      news: '新聞',
       contact: '聯繫',
       getStarted: '立即開始'
     },
@@ -249,6 +328,12 @@ export const translations = {
         subtitle: '聯繫我們的銷售團隊，獲取個性化演示和報價。',
         requestDemo: '請求演示',
         contactSales: '聯繫銷售'
+      },
+      pricingCTA: {
+        title: '準備好開始了嗎？',
+        subtitle: '聯繫我們的銷售團隊，獲取個性化演示和報價。',
+        requestDemo: '請求演示',
+        contactSales: '聯繫銷售'
       }
     },
     
@@ -305,16 +390,91 @@ export const translations = {
         email: '電子郵件',
         phone: '電話',
         office: '辦公室',
-        support: '支持',
-        officeHours: '辦公時間',
-        mondayFriday: '週一至週五',
+        support: '支持'
+      },
+      officeHours: {
+        title: '辦公時間',
+        monday: '週一至週五',
+        mondayHours: '上午 8:00 - 下午 6:00 PST',
         saturday: '週六',
+        saturdayHours: '上午 9:00 - 下午 2:00 PST',
         sunday: '週日',
-        closed: '休息'
+        sundayClosed: '休息'
       },
       faq: {
         title: '常見問題',
-        subtitle: '查找關於我們服務的常見問題答案'
+        subtitle: '查找關於我們服務的常見問題答案',
+        question1: '您能多快部署安全解決方案？',
+        answer1: '我們的雲端解決方案可以在 24-48 小時內部署，具體取決於您的基礎設施要求和定制需求。',
+        question2: '您提供 24/7 支持嗎？',
+        answer2: '是的，我們為所有企業客戶提供全天候支持，包括緊急響應和技術協助。',
+        question3: '您專注於哪些行業？',
+        answer3: '我們服務所有行業的客戶，特別在金融服務、醫療保健、政府和技術領域具有專業知識。',
+        question4: '您能與我們現有的安全工具集成嗎？',
+        answer4: '絕對可以。我們的解決方案設計為與您現有的安全基礎設施和工具無縫集成。'
+      },
+      cta: {
+        title: '準備好開始了嗎？',
+        subtitle: '加入數百家信任 Avocado.ai 的組織，保護他們的網絡安全需求。',
+        scheduleDemo: '安排演示',
+        downloadBrochure: '下載宣傳冊'
+      }
+    },
+    
+    // Careers page
+    careers: {
+      hero: {
+        title: '加入我們的團隊',
+        subtitle: '幫助我們塑造 AI 驅動網絡安全的未來。加入一個致力於保護全球數字資產的熱情專業團隊。'
+      },
+      whyJoin: {
+        title: '為什麼加入 Avocado.ai？',
+        subtitle: '成為正在用人工智能革新網絡安全的團隊的一員。',
+        learning: {
+          title: '持續學習',
+          description: '獲得尖端技術和專業發展機會。'
+        },
+        culture: {
+          title: '包容文化',
+          description: '在重視多樣性和創新的協作環境中工作。'
+        },
+        impact: {
+          title: '全球影響',
+          description: '通過保護全球組織免受網絡威脅來產生影響。'
+        }
+      },
+      openPositions: {
+        title: '職位空缺',
+        subtitle: '探索加入我們不斷壯大的網絡安全專家團隊的機會。'
+      },
+      applyNow: '立即申請',
+      cta: {
+        title: '準備好加入我們了嗎？',
+        subtitle: '沒有看到適合的職位？我們一直在尋找有才華的人才。',
+        contactUs: '聯繫我們',
+        sendEmail: '發送郵件'
+      }
+    },
+    
+    // News page
+    news: {
+      hero: {
+        title: '最新消息與更新',
+        subtitle: '了解我們的最新發展、產品發布和行業見解。'
+      },
+      categories: {
+        title: '新聞分類'
+      },
+      readMore: '閱讀更多',
+      noNews: {
+        title: '沒有找到新聞',
+        subtitle: '沒有新聞文章符合您當前的篩選條件。請嘗試不同的分類。'
+      },
+      newsletter: {
+        title: '保持更新',
+        subtitle: '訂閱我們的時事通訊以獲取最新消息和更新。',
+        placeholder: '輸入您的電子郵件地址',
+        subscribe: '訂閱'
       }
     },
     
