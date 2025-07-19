@@ -356,31 +356,7 @@ EOF
 # Enable and start the service
 sudo systemctl enable avocado-ai.service
 
-# Create backup script
-print_status "Creating backup script..."
-cat > backup.sh << 'EOF'
-#!/bin/bash
 
-# Backup script for Avocado.ai website
-BACKUP_DIR="/opt/backups/avocado-ai"
-DATE=$(date +%Y%m%d_%H%M%S)
-
-mkdir -p $BACKUP_DIR
-
-# Backup database
-docker exec avocado_db pg_dump -U avocado_user avocado_db > $BACKUP_DIR/database_$DATE.sql
-
-# Backup application files
-tar -czf $BACKUP_DIR/app_$DATE.tar.gz -C /opt avocado-ai
-
-# Keep only last 7 days of backups
-find $BACKUP_DIR -name "*.sql" -mtime +7 -delete
-find $BACKUP_DIR -name "*.tar.gz" -mtime +7 -delete
-
-echo "Backup completed: $BACKUP_DIR"
-EOF
-
-chmod +x backup.sh
 
 # Create monitoring script
 print_status "Creating monitoring script..."
@@ -484,8 +460,7 @@ echo "1. Update the domain name in nginx.conf and .env files"
 echo "2. Run: sudo systemctl start avocado-ai.service"
 echo "3. For SSL: ./setup-ssl.sh your-domain.com"
 echo "4. Monitor: ./monitor.sh"
-echo "5. Backup: ./backup.sh"
-echo "6. Update: ./update.sh"
+echo "5. Update: ./update.sh"
 echo
 echo "🌐 Your website will be available at:"
 echo "   - HTTP: http://your-domain.com"

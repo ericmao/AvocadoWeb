@@ -78,13 +78,43 @@ uvicorn main:app --reload
 
 Create `.env` files in both frontend and backend directories with necessary configuration.
 
+## 🧪 Testing
+
+This project includes comprehensive automated testing with GitHub Actions.
+
+### Running Tests Locally
+
+**Backend Tests:**
+```bash
+cd backend
+pip install -r requirements.txt
+python -m pytest tests/ -v
+```
+
+**Frontend Tests:**
+```bash
+cd frontend
+npm install
+npm test
+```
+
+### Continuous Integration
+
+- Tests run automatically on every push and pull request
+- Backend tests include unit tests, integration tests, and code quality checks
+- Frontend tests include component tests, type checking, and build verification
+- See [TESTING_GUIDE.md](TESTING_GUIDE.md) for detailed information
+
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+3. Write tests for new features
+4. Commit your changes
+5. Push to the branch
+6. Create a Pull Request
+
+**Note:** All tests must pass before merging pull requests.
 
 ## 📄 License
 

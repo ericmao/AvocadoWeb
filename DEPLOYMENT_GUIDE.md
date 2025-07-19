@@ -133,12 +133,7 @@ docker logs avocado_frontend
 docker logs avocado_nginx
 ```
 
-### 備份資料
 
-```bash
-cd /opt/avocado-ai
-./backup.sh
-```
 
 ### 監控系統
 
@@ -286,16 +281,7 @@ docker-compose -f docker-compose.prod.yml down -v
 
 ## 🔄 自動化腳本
 
-### 每日備份
 
-創建 cron 任務：
-```bash
-# 編輯 crontab
-crontab -e
-
-# 添加每日備份任務
-0 2 * * * /opt/avocado-ai/backup.sh
-```
 
 ### 監控腳本
 
@@ -346,7 +332,7 @@ export NODE_OPTIONS="--max-old-space-size=2048"
 - [ ] 域名配置正確
 - [ ] SSL 證書安裝
 - [ ] 防火牆配置
-- [ ] 備份系統設置
+
 - [ ] 監控系統設置
 - [ ] 安全配置完成
 
