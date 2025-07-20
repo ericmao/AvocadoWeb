@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - NEXT_PUBLIC_API_URL=https://avocado.ai/api
+    networks:
+      - avocado-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://avocado_user:avocado_pass@db:5432/avocado_db
+      - SECRET_KEY=your-secret-key-here
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+    depends_on:
+      - db
+    networks:
+      - avocado-network
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=avocado_db
+      - POSTGRES_USER=avocado_user
+      - POSTGRES_PASSWORD=avocado_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - avocado-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./nginx/sites-available:/etc/nginx/sites-available:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - avocado-network
+
+volumes:
+  postgres_data:
+
+networks:
+  avocado-network:
+    driver: bridge 
