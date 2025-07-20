@@ -59,56 +59,96 @@ def delete_technique(technique_id: int, db: Session = Depends(get_db)):
     db.commit()
     return {"message": "Technique deleted successfully"}
 
-# Sample data endpoint
+# Sample data endpoint with new AI techniques
 @router.get("/sample/data")
 def get_sample_techniques():
     return [
         {
             "id": 1,
-            "name": "Machine Learning",
-            "description": "Advanced ML algorithms that learn from patterns and adapt to new threats in real-time.",
-            "features": json.dumps(["Pattern Recognition", "Anomaly Detection", "Predictive Analytics", "Behavioral Analysis"]),
+            "name": "1️⃣ AI-Powered Threat Detection & Behavioral Analytics",
+            "description": "Leverage machine learning and behavioral models to detect evolving threats in real-time.",
+            "features": ["Pattern Recognition", "Anomaly Detection", "Predictive Attack Analysis", "Machine Learning-Based Behavioral Profiling"],
             "category": "AI/ML",
             "is_active": True
         },
         {
             "id": 2,
-            "name": "Threat Intelligence",
-            "description": "Comprehensive threat intelligence gathering and analysis from global sources.",
-            "features": json.dumps(["Real-time Monitoring", "Threat Hunting", "Vulnerability Assessment", "Risk Analysis"]),
-            "category": "Security",
+            "name": "2️⃣ Edge AI Agentic RAG Sequence Analysis Engine",
+            "description": "Generic Edge AI Detection Engine for Suspicious Sequence Analysis. A software-hardware integrated solution deploying lightweight AI agents at the edge (Wi-Fi mesh, firewalls, CPE, IoT gateways) for continuous local detection.",
+            "features": ["Edge AI Inference on network devices", "Encrypted Traffic Behavior Analysis", "Local Blocking & Cloud Collaborative Response", "Compatible with OpenWRT, prplOS, RDK-B, Containers", "Agentic RAG: Retrieval-Augmented Generation with temporal and semantic memory for adaptive threat detection"],
+            "category": "Edge AI",
             "is_active": True
         },
         {
             "id": 3,
-            "name": "Automated Response",
-            "description": "Intelligent automation that responds to threats faster than human operators.",
-            "features": json.dumps(["Instant Blocking", "Incident Response", "Workflow Automation", "Alert Management"]),
-            "category": "Automation",
+            "name": "3️⃣ AI-Augmented XDR, SIEM & SenseL Language Model for Threat Intelligence",
+            "description": "Combine XDR and SIEM with AI SenseL LLM for enhanced threat intelligence, incident correlation, and response.",
+            "features": ["Threat Hunting & Incident Correlation", "Vulnerability and Risk Assessment", "Automated Report Generation with LLM", "Kill Chain Mapping and Attack Contextualization"],
+            "category": "XDR/SIEM",
             "is_active": True
         },
         {
             "id": 4,
-            "name": "Zero Trust Security",
-            "description": "Implementing zero trust principles across all network and application layers.",
-            "features": json.dumps(["Identity Verification", "Access Control", "Network Segmentation", "Continuous Monitoring"]),
-            "category": "Security",
+            "name": "4️⃣ AI-Driven War Room & Response Support Services",
+            "description": "High-Level AI Security War Room with LLM Integration. Empower your SOC operations with an AI-powered war room for real-time decision support.",
+            "features": ["Real-Time Threat Visualization Dashboard", "LLM-Assisted Response Playbook Recommendations", "Digital Twin Incident Simulation & Response Training", "Multilingual Threat Intelligence Analysis"],
+            "category": "SOC/War Room",
             "is_active": True
         },
         {
             "id": 5,
-            "name": "Behavioral Analytics",
-            "description": "Analyzing user and system behavior to detect suspicious activities.",
-            "features": json.dumps(["User Behavior Analysis", "System Monitoring", "Risk Scoring", "Threat Correlation"]),
-            "category": "Analytics",
-            "is_active": True
-        },
-        {
-            "id": 6,
-            "name": "AI-Powered Detection",
-            "description": "Next-generation AI systems that detect and prevent advanced persistent threats.",
-            "features": json.dumps(["Deep Learning", "Neural Networks", "Natural Language Processing", "Computer Vision"]),
-            "category": "AI/ML",
+            "name": "5️⃣ AI-Enhanced Breach & Attack Simulation (BAS)",
+            "description": "Transform cyber readiness exercises with AI-powered BAS to continuously validate detection and response capabilities.",
+            "features": ["Automated APT Simulation", "IoT/OT Attack Scenarios", "Hybrid Red & Blue Team Simulations", "AI-Driven Scenario Generation & Adaptation"],
+            "category": "BAS/Simulation",
             "is_active": True
         }
-    ] 
+    ]
+
+# Initialize database with default techniques
+@router.post("/init/default")
+def initialize_default_techniques(db: Session = Depends(get_db)):
+    # Clear existing techniques
+    db.query(Technique).delete()
+    db.commit()
+    
+    # Add default techniques
+    default_techniques = [
+        {
+            "name": "1️⃣ AI-Powered Threat Detection & Behavioral Analytics",
+            "description": "Leverage machine learning and behavioral models to detect evolving threats in real-time.",
+            "features": ["Pattern Recognition", "Anomaly Detection", "Predictive Attack Analysis", "Machine Learning-Based Behavioral Profiling"],
+            "category": "AI/ML"
+        },
+        {
+            "name": "2️⃣ Edge AI Agentic RAG Sequence Analysis Engine",
+            "description": "Generic Edge AI Detection Engine for Suspicious Sequence Analysis. A software-hardware integrated solution deploying lightweight AI agents at the edge (Wi-Fi mesh, firewalls, CPE, IoT gateways) for continuous local detection.",
+            "features": ["Edge AI Inference on network devices", "Encrypted Traffic Behavior Analysis", "Local Blocking & Cloud Collaborative Response", "Compatible with OpenWRT, prplOS, RDK-B, Containers", "Agentic RAG: Retrieval-Augmented Generation with temporal and semantic memory for adaptive threat detection"],
+            "category": "Edge AI"
+        },
+        {
+            "name": "3️⃣ AI-Augmented XDR, SIEM & SenseL Language Model for Threat Intelligence",
+            "description": "Combine XDR and SIEM with AI SenseL LLM for enhanced threat intelligence, incident correlation, and response.",
+            "features": ["Threat Hunting & Incident Correlation", "Vulnerability and Risk Assessment", "Automated Report Generation with LLM", "Kill Chain Mapping and Attack Contextualization"],
+            "category": "XDR/SIEM"
+        },
+        {
+            "name": "4️⃣ AI-Driven War Room & Response Support Services",
+            "description": "High-Level AI Security War Room with LLM Integration. Empower your SOC operations with an AI-powered war room for real-time decision support.",
+            "features": ["Real-Time Threat Visualization Dashboard", "LLM-Assisted Response Playbook Recommendations", "Digital Twin Incident Simulation & Response Training", "Multilingual Threat Intelligence Analysis"],
+            "category": "SOC/War Room"
+        },
+        {
+            "name": "5️⃣ AI-Enhanced Breach & Attack Simulation (BAS)",
+            "description": "Transform cyber readiness exercises with AI-powered BAS to continuously validate detection and response capabilities.",
+            "features": ["Automated APT Simulation", "IoT/OT Attack Scenarios", "Hybrid Red & Blue Team Simulations", "AI-Driven Scenario Generation & Adaptation"],
+            "category": "BAS/Simulation"
+        }
+    ]
+    
+    for technique_data in default_techniques:
+        db_technique = Technique(**technique_data)
+        db.add(db_technique)
+    
+    db.commit()
+    return {"message": "Default techniques initialized successfully"} 

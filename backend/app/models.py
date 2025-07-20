@@ -38,6 +38,7 @@ class Job(Base):
     description = Column(Text, nullable=False)
     requirements = Column(ARRAY(String), nullable=False)
     benefits = Column(ARRAY(String), nullable=False)
+    tags = Column(ARRAY(String), default=[])  # 新增 tags 欄位
     posted_date = Column(DateTime, default=datetime.utcnow)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -52,6 +53,7 @@ class News(Base):
     category = Column(String, nullable=False)  # Product Launch, Company News, Industry Update
     published_date = Column(DateTime, default=datetime.utcnow)
     is_published = Column(Boolean, default=True)
+    images = Column(ARRAY(String), default=[])  # 存儲圖片URL列表，最多3張
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -77,6 +79,18 @@ class Product(Base):
     description = Column(Text, nullable=False)
     features = Column(ARRAY(String), nullable=False)
     price = Column(String, nullable=False)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class Technique(Base):
+    __tablename__ = "techniques"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    category = Column(String, nullable=False)  # AI, ML, Cybersecurity, Data Analysis
+    description = Column(Text, nullable=False)
+    features = Column(ARRAY(String), nullable=False)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow) 

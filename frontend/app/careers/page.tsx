@@ -115,11 +115,6 @@ export default function Careers() {
     }
   }
 
-  const handleApply = (jobId: number) => {
-    // Open application form or redirect to application page
-    window.open(`/careers/apply/${jobId}`, '_blank')
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -293,12 +288,6 @@ export default function Careers() {
                     </div>
                     
                     <div className="mt-6 lg:mt-0 lg:ml-6">
-                      <button
-                        onClick={() => handleApply(job.id)}
-                        className="btn-primary w-full lg:w-auto"
-                      >
-                        {t('careers.applyNow')}
-                      </button>
                       <p className="text-xs text-gray-500 mt-2">
                         Posted: {new Date(job.postedDate).toLocaleDateString()}
                       </p>

@@ -31,6 +31,14 @@ module.exports = {
           700: '#0369a1',
           800: '#075985',
           900: '#0c4a6e',
+        },
+        dark: {
+          green: '#0f4c3a',
+          'deep-green': '#0a2e1f',
+          purple: '#4c1d95',
+          'purple-accent': '#7c3aed',
+          bg: '#0f172a',
+          surface: '#1e293b',
         }
       },
       fontFamily: {

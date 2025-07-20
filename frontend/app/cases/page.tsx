@@ -1,91 +1,104 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import { Shield, Brain, TrendingUp, Users, Globe, Building } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
 
+interface CaseStudy {
+  id: number
+  title: string
+  industry: string
+  challenge: string
+  solution: string
+  results: string[]
+  is_active: boolean
+}
+
 export default function Cases() {
   const { t } = useLanguage()
-  const caseStudies = [
-    {
-      title: 'Fortune 500 Financial Institution',
-      industry: 'Financial Services',
-      challenge: 'Faced sophisticated cyber attacks targeting customer data and financial transactions.',
-      solution: 'Implemented Avocado AI Sentinel with behavioral analytics and real-time threat detection.',
-      results: [
-        '99.9% threat detection rate',
-        '60% reduction in false positives',
-        'Real-time response to threats',
-        'Compliance with financial regulations'
-      ],
-      icon: Building
-    },
-    {
-      title: 'Global Healthcare Provider',
-      industry: 'Healthcare',
-      challenge: 'Needed to protect sensitive patient data while maintaining system accessibility for medical staff.',
-      solution: 'Deployed Avocado Zero Trust framework with advanced access controls and monitoring.',
-      results: [
-        'Zero data breaches in 2 years',
-        'HIPAA compliance achieved',
-        'Improved system performance',
-        'Enhanced user experience'
-      ],
-      icon: Shield
-    },
-    {
-      title: 'E-commerce Platform',
-      industry: 'Retail',
-      challenge: 'Experienced frequent DDoS attacks and payment fraud attempts.',
-      solution: 'Integrated Avocado Monitor with AI-powered fraud detection and automated response.',
-      results: [
-        '95% reduction in fraud attempts',
-        '99.9% uptime maintained',
-        'Automated threat response',
-        'Improved customer trust'
-      ],
-      icon: Globe
-    },
-    {
-      title: 'Technology Startup',
-      industry: 'Technology',
-      challenge: 'Rapid growth required scalable security solution without dedicated security team.',
-      solution: 'Implemented Avocado Shield with managed security services and cloud-based management.',
-      results: [
-        '50% cost savings vs traditional solutions',
-        '24/7 security monitoring',
-        'Easy scalability',
-        'Quick deployment'
-      ],
-      icon: Brain
-    },
-    {
-      title: 'Government Agency',
-      industry: 'Government',
-      challenge: 'Required high-level security clearance and protection against nation-state attacks.',
-      solution: 'Custom Avocado Intelligence platform with advanced threat hunting and intelligence sharing.',
-      results: [
-        'Top-level security clearance',
-        'Advanced threat intelligence',
-        'Inter-agency collaboration',
-        'Comprehensive audit trails'
-      ],
-      icon: Shield
-    },
-    {
-      title: 'Manufacturing Company',
-      industry: 'Manufacturing',
-      challenge: 'Industrial control systems vulnerable to cyber attacks affecting production.',
-      solution: 'Deployed specialized IoT security with Avocado Response for incident management.',
-      results: [
-        'Protected critical infrastructure',
-        'Zero production downtime',
-        'Automated incident response',
-        'Compliance with industry standards'
-      ],
-      icon: TrendingUp
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchCaseStudies()
+  }, [])
+
+  const fetchCaseStudies = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/cases')
+      const data = await response.json()
+      setCaseStudies(data)
+    } catch (error) {
+      console.error('Error fetching case studies:', error)
+      // Fallback data
+      setCaseStudies([
+        {
+          id: 1,
+          title: 'Fortune 500 Financial Institution',
+          industry: 'Financial Services',
+          challenge: 'Faced sophisticated cyber attacks targeting customer data and financial transactions.',
+          solution: 'Implemented Avocado AI Sentinel with behavioral analytics and real-time threat detection.',
+          results: [
+            '99.9% threat detection rate',
+            '60% reduction in false positives',
+            'Real-time response to threats',
+            'Compliance with financial regulations'
+          ],
+          is_active: true
+        },
+        {
+          id: 2,
+          title: 'Global Healthcare Provider',
+          industry: 'Healthcare',
+          challenge: 'Needed to protect sensitive patient data while maintaining system accessibility for medical staff.',
+          solution: 'Deployed Avocado Zero Trust framework with advanced access controls and monitoring.',
+          results: [
+            'Zero data breaches in 2 years',
+            'HIPAA compliance achieved',
+            'Improved system performance',
+            'Enhanced user experience'
+          ],
+          is_active: true
+        },
+        {
+          id: 3,
+          title: 'E-commerce Platform',
+          industry: 'Retail',
+          challenge: 'Experienced frequent DDoS attacks and payment fraud attempts.',
+          solution: 'Integrated Avocado Monitor with AI-powered fraud detection and automated response.',
+          results: [
+            '95% reduction in fraud attempts',
+            '99.9% uptime maintained',
+            'Automated threat response',
+            'Improved customer trust'
+          ],
+          is_active: true
+        }
+      ])
+    } finally {
+      setLoading(false)
     }
-  ]
+  }
+
+  const getIconForIndustry = (industry: string) => {
+    switch (industry.toLowerCase()) {
+      case 'financial services':
+        return Building
+      case 'healthcare':
+        return Shield
+      case 'retail':
+        return Globe
+      case 'technology':
+        return Brain
+      case 'government':
+        return Shield
+      case 'manufacturing':
+        return TrendingUp
+      default:
+        return Users
+    }
+  }
 
   const testimonials = [
     {
@@ -110,6 +123,17 @@ export default function Cases() {
       rating: 5
     }
   ]
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-avocado-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading case studies...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -149,49 +173,52 @@ export default function Cases() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={study.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="card"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <study.icon className="h-10 w-10 text-avocado-600" />
-                  <span className="text-sm font-medium text-avocado-600 bg-avocado-50 px-3 py-1 rounded-full">
-                    {study.industry}
-                  </span>
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  {study.title}
-                </h3>
-                
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Challenge:</h4>
-                    <p className="text-gray-600 text-sm">{study.challenge}</p>
+            {caseStudies.map((study, index) => {
+              const IconComponent = getIconForIndustry(study.industry)
+              return (
+                <motion.div
+                  key={study.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  className="card"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <IconComponent className="h-10 w-10 text-avocado-600" />
+                    <span className="text-sm font-medium text-avocado-600 bg-avocado-50 px-3 py-1 rounded-full">
+                      {study.industry}
+                    </span>
                   </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                    {study.title}
+                  </h3>
                   
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Solution:</h4>
-                    <p className="text-gray-600 text-sm">{study.solution}</p>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Challenge:</h4>
+                      <p className="text-gray-600 text-sm">{study.challenge}</p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Solution:</h4>
+                      <p className="text-gray-600 text-sm">{study.solution}</p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Results:</h4>
+                      <ul className="space-y-1">
+                        {study.results.map((result) => (
+                          <li key={result} className="flex items-center text-sm text-gray-600">
+                            <div className="w-2 h-2 bg-avocado-500 rounded-full mr-3"></div>
+                            {result}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Results:</h4>
-                    <ul className="space-y-1">
-                      {study.results.map((result) => (
-                        <li key={result} className="flex items-center text-sm text-gray-600">
-                          <div className="w-2 h-2 bg-avocado-500 rounded-full mr-3"></div>
-                          {result}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>

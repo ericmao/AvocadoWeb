@@ -8,9 +8,9 @@ import { LanguageProvider } from './contexts/LanguageContext'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Avocado.ai - Cybersecurity & AI Solutions',
+  title: '酪梨智慧 - Cybersecurity & AI Solutions',
   description: 'Leading cybersecurity and AI company providing innovative solutions for enterprise security and artificial intelligence.',
-  keywords: 'cybersecurity, AI, artificial intelligence, security solutions, enterprise security',
+  keywords: 'cybersecurity, AI, artificial intelligence, security solutions, enterprise security, 酪梨智慧',
 }
 
 export default function RootLayout({

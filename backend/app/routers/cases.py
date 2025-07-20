@@ -4,26 +4,26 @@ from typing import List
 import json
 
 from ..database import get_db
-from ..models import CaseStudy
-from ..schemas import CaseStudy as CaseStudySchema, CaseStudyCreate
+from ..models import Case
+from ..schemas import Case as CaseSchema, CaseCreate
 
 router = APIRouter()
 
-@router.get("/", response_model=List[CaseStudySchema])
+@router.get("/", response_model=List[CaseSchema])
 def get_case_studies(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    cases = db.query(CaseStudy).filter(CaseStudy.is_active == True).offset(skip).limit(limit).all()
+    cases = db.query(Case).filter(Case.is_active == True).offset(skip).limit(limit).all()
     return cases
 
-@router.get("/{case_id}", response_model=CaseStudySchema)
+@router.get("/{case_id}", response_model=CaseSchema)
 def get_case_study(case_id: int, db: Session = Depends(get_db)):
-    case = db.query(CaseStudy).filter(CaseStudy.id == case_id, CaseStudy.is_active == True).first()
+    case = db.query(Case).filter(Case.id == case_id, Case.is_active == True).first()
     if case is None:
         raise HTTPException(status_code=404, detail="Case study not found")
     return case
 
-@router.post("/", response_model=CaseStudySchema)
-def create_case_study(case: CaseStudyCreate, db: Session = Depends(get_db)):
-    db_case = CaseStudy(
+@router.post("/", response_model=CaseSchema)
+def create_case_study(case: CaseCreate, db: Session = Depends(get_db)):
+    db_case = Case(
         title=case.title,
         industry=case.industry,
         challenge=case.challenge,
@@ -35,9 +35,9 @@ def create_case_study(case: CaseStudyCreate, db: Session = Depends(get_db)):
     db.refresh(db_case)
     return db_case
 
-@router.put("/{case_id}", response_model=CaseStudySchema)
-def update_case_study(case_id: int, case: CaseStudyCreate, db: Session = Depends(get_db)):
-    db_case = db.query(CaseStudy).filter(CaseStudy.id == case_id).first()
+@router.put("/{case_id}", response_model=CaseSchema)
+def update_case_study(case_id: int, case: CaseCreate, db: Session = Depends(get_db)):
+    db_case = db.query(Case).filter(Case.id == case_id).first()
     if db_case is None:
         raise HTTPException(status_code=404, detail="Case study not found")
     
@@ -53,7 +53,7 @@ def update_case_study(case_id: int, case: CaseStudyCreate, db: Session = Depends
 
 @router.delete("/{case_id}")
 def delete_case_study(case_id: int, db: Session = Depends(get_db)):
-    db_case = db.query(CaseStudy).filter(CaseStudy.id == case_id).first()
+    db_case = db.query(Case).filter(Case.id == case_id).first()
     if db_case is None:
         raise HTTPException(status_code=404, detail="Case study not found")
     

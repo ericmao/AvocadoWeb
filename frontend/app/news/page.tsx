@@ -12,6 +12,7 @@ interface NewsItem {
   category: string
   publishedDate: string
   isPublished: boolean
+  images: string[]
 }
 
 export default function News() {
@@ -19,6 +20,8 @@ export default function News() {
   const [news, setNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null)
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     fetchNews()
@@ -28,7 +31,35 @@ export default function News() {
     try {
       const response = await fetch('http://localhost:8000/api/news')
       const data = await response.json()
-      setNews(data)
+      
+      // 統一的日期處理函數
+      const formatDateForDisplay = (dateString: string) => {
+        if (!dateString) return ''
+        // 如果已經是 YYYY-MM-DD 格式，直接返回
+        if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+          return dateString
+        }
+        // 如果是 ISO 格式，轉換為本地日期，避免時區偏移
+        const date = new Date(dateString)
+        // 使用 UTC 方法避免時區偏移
+        const year = date.getUTCFullYear()
+        const month = String(date.getUTCMonth() + 1).padStart(2, '0')
+        const day = String(date.getUTCDate()).padStart(2, '0')
+        return `${year}-${month}-${day}`
+      }
+      
+      // 轉換後端數據格式為前端期望的格式
+      const transformedNews = data.map((news: any) => ({
+        id: news.id,
+        title: news.title,
+        content: news.content,
+        category: news.category,
+        publishedDate: news.published_date ? formatDateForDisplay(news.published_date) : new Date().toISOString().split('T')[0],
+        isPublished: news.is_published,
+        images: news.images || []
+      }))
+      
+      setNews(transformedNews)
     } catch (error) {
       console.error('Error fetching news:', error)
       // Fallback data
@@ -39,7 +70,8 @@ export default function News() {
           content: 'We are excited to announce the launch of our latest AI-powered security platform. This revolutionary solution combines cutting-edge machine learning algorithms with advanced threat detection capabilities to provide unprecedented protection for enterprise networks.',
           category: 'Product Launch',
           publishedDate: '2024-01-15',
-          isPublished: true
+          isPublished: true,
+          images: []
         },
         {
           id: 2,
@@ -47,7 +79,8 @@ export default function News() {
           content: 'Avocado.ai has been recognized as one of the top cybersecurity companies in 2024 by leading industry analysts. This recognition highlights our commitment to innovation and excellence in AI-powered security solutions.',
           category: 'Company News',
           publishedDate: '2024-01-10',
-          isPublished: true
+          isPublished: true,
+          images: []
         },
         {
           id: 3,
@@ -55,7 +88,8 @@ export default function News() {
           content: 'We are proud to announce strategic partnerships with leading technology companies to expand our global reach and enhance our security offerings. These partnerships will enable us to provide even more comprehensive protection for our clients.',
           category: 'Partnership',
           publishedDate: '2024-01-05',
-          isPublished: true
+          isPublished: true,
+          images: []
         },
         {
           id: 4,
@@ -63,12 +97,18 @@ export default function News() {
           content: 'As we enter 2024, we\'re seeing significant trends in AI-powered cybersecurity. Our research team has identified key developments that will shape the future of digital protection.',
           category: 'Industry Update',
           publishedDate: '2024-01-01',
-          isPublished: true
+          isPublished: true,
+          images: []
         }
       ])
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleReadMore = (newsItem: NewsItem) => {
+    setSelectedNews(newsItem)
+    setShowModal(true)
   }
 
   const categories = [
@@ -157,6 +197,17 @@ export default function News() {
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
                 >
+                  {/* 顯示第一張圖片 */}
+                  {item.images.length > 0 && (
+                    <div className="h-48 overflow-hidden">
+                      <img
+                        src={item.images[0]}
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                  
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-avocado-100 text-avocado-800">
@@ -176,7 +227,10 @@ export default function News() {
                       {item.content}
                     </p>
                     
-                    <button className="text-avocado-600 hover:text-avocado-700 font-medium flex items-center">
+                    <button 
+                      onClick={() => handleReadMore(item)}
+                      className="text-avocado-600 hover:text-avocado-700 font-medium flex items-center"
+                    >
                       {t('news.readMore')}
                       <ArrowRight className="h-4 w-4 ml-1" />
                     </button>
@@ -227,6 +281,100 @@ export default function News() {
           </motion.div>
         </div>
       </section>
+
+      {/* News Detail Modal */}
+      {showModal && selectedNews && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+          >
+            {/* Header */}
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-avocado-100 text-avocado-800">
+                      {selectedNews.category}
+                    </span>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <Calendar className="h-4 w-4 mr-1" />
+                      {new Date(selectedNews.publishedDate).toLocaleDateString()}
+                    </div>
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                    {selectedNews.title}
+                  </h2>
+                </div>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-6">
+              {/* Images Gallery */}
+              {selectedNews.images.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">圖片集</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {selectedNews.images.map((image, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={image}
+                          alt={`${selectedNews.title} - Image ${index + 1}`}
+                          className="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 rounded-lg flex items-center justify-center">
+                          <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-sm font-medium">
+                            圖片 {index + 1}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Article Content */}
+              <div className="prose prose-lg max-w-none">
+                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                  {selectedNews.content}
+                </p>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="p-6 border-t border-gray-200 bg-gray-50 rounded-b-2xl">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2 text-sm text-gray-600">
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span>{selectedNews.images.length} 張圖片</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="px-6 py-2 bg-avocado-600 text-white rounded-lg hover:bg-avocado-700 transition-colors"
+                >
+                  關閉
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   )
 } 

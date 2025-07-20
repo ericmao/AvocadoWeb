@@ -16,7 +16,7 @@ export const translations = {
     home: {
       hero: {
         title: 'Securing the Future with',
-        subtitle: 'Avocado.ai combines cutting-edge cybersecurity with artificial intelligence to protect your digital world. We provide enterprise-grade security solutions that adapt and evolve with emerging threats.',
+        subtitle: '酪梨智慧 combines cutting-edge cybersecurity with artificial intelligence to protect your digital world. We provide enterprise-grade security solutions that adapt and evolve with emerging threats.',
         exploreProducts: 'Explore Products',
         getStarted: 'Get Started'
       },
@@ -184,16 +184,16 @@ export const translations = {
         title: 'Why Join Avocado.ai?',
         subtitle: 'Be part of a team that\'s revolutionizing cybersecurity with artificial intelligence.',
         learning: {
-          title: 'Continuous Learning',
-          description: 'Access to cutting-edge technologies and opportunities for professional development.'
+          title: '1️⃣ Continuous Innovation & Learning',
+          description: 'Grow in an environment that encourages experimentation and rapid iteration, continuously exposed to the cutting-edge technologies of artificial intelligence and cybersecurity.'
         },
         culture: {
-          title: 'Inclusive Culture',
-          description: 'Work in a collaborative environment that values diversity and innovation.'
+          title: '2️⃣ Open & Inclusive Collaboration',
+          description: 'Collaborate with professionals from diverse backgrounds, inspiring cross-domain creativity and building a diverse, open innovation team.'
         },
         impact: {
-          title: 'Global Impact',
-          description: 'Make a difference by protecting organizations worldwide from cyber threats.'
+          title: '3️⃣ Substantial Impact',
+          description: 'Participate in developing innovative XDR solutions for the global market, actually driving the future transformation of cybersecurity protection.'
         }
       },
       openPositions: {
@@ -257,15 +257,15 @@ export const translations = {
     home: {
       hero: {
         title: '用人工智能保護未來',
-        subtitle: 'Avocado.ai 結合尖端網絡安全技術與人工智能，保護您的數字世界。我們提供企業級安全解決方案，能夠適應和應對新興威脅。',
+        subtitle: '酪梨智慧 結合尖端網路安全技術與人工智能，保護您的數位世界。我們提供企業級安全解決方案，能夠適應和應對新興威脅。',
         exploreProducts: '探索產品',
         getStarted: '立即開始'
       },
       features: {
-        title: '為什麼選擇 Avocado.ai？',
-        subtitle: '我們的綜合方法結合了最新的網絡安全技術與人工智能，提供無與倫比的保護。',
-        advancedSecurity: '先進網絡安全',
-        advancedSecurityDesc: '最先進的安全解決方案，保護您的數字資產免受不斷演變的威脅。',
+        title: '為什麼選擇 酪梨智慧？',
+        subtitle: '我們的綜合方法結合了最新的網路安全技術與人工智能，提供無與倫比的保護。',
+                  advancedSecurity: '先進網路安全',
+        advancedSecurityDesc: '最先進的安全解決方案，保護您的數位資產免受不斷演變的威脅。',
         aiIntelligence: 'AI 驅動智能',
         aiIntelligenceDesc: '尖端人工智能，能夠學習並適應新的安全挑戰。',
         realTimeProtection: '實時保護',
@@ -283,7 +283,7 @@ export const translations = {
       },
       cta: {
         title: '準備好保護您的未來了嗎？',
-        subtitle: '加入數百家信任 Avocado.ai 的企業，保護他們的網絡安全需求。',
+        subtitle: '加入數百家信任 Avocado.ai 的企業，保護他們的網路安全需求。',
         getStartedToday: '立即開始',
         viewCaseStudies: '查看案例研究'
       }
@@ -293,11 +293,11 @@ export const translations = {
     techniques: {
       hero: {
         title: '我們的先進技術',
-        subtitle: '探索為我們的網絡安全和 AI 解決方案提供動力的尖端技術和方法論。'
+        subtitle: '探索為我們的網路安全和 AI 解決方案提供動力的尖端技術和方法論。'
       },
       coreTechnologies: {
         title: '核心技術',
-        subtitle: '我們的綜合技術套件結合了最新的網絡安全與人工智能。'
+        subtitle: '我們的綜合技術套件結合了最新的網路安全與人工智能。'
       },
       technologyStack: {
         title: '技術棧',
@@ -313,11 +313,11 @@ export const translations = {
     products: {
       hero: {
         title: '我們的產品與解決方案',
-        subtitle: '探索我們專為保護您的組織而設計的綜合網絡安全和 AI 產品套件。'
+        subtitle: '探索我們專為保護您的組織而設計的綜合網路安全和 AI 產品套件。'
       },
       coreProducts: {
         title: '核心產品',
-        subtitle: '我們的旗艦產品結合尖端 AI 與成熟的網絡安全方法論。'
+        subtitle: '我們的旗艦產品結合尖端 AI 與成熟的網路安全方法論。'
       },
       enterpriseSolutions: {
         title: '企業解決方案',
@@ -341,11 +341,11 @@ export const translations = {
     cases: {
       hero: {
         title: '成功案例',
-        subtitle: '了解各行各業的組織如何通過 Avocado.ai 解決方案保護其數字資產。'
+        subtitle: '了解各行各業的組織如何通過 Avocado.ai 解決方案保護其數位資產。'
       },
       caseStudies: {
         title: '案例研究',
-        subtitle: '我們的解決方案如何保護組織免受網絡威脅的真實案例。'
+        subtitle: '我們的解決方案如何保護組織免受網路威脅的真實案例。'
       },
       testimonials: {
         title: '客戶評價',
@@ -353,7 +353,7 @@ export const translations = {
       },
       impact: {
         title: '我們的影響',
-        subtitle: '數字說明一切'
+        subtitle: '數位說明一切'
       },
       cta: {
         title: '準備好加入我們的成功案例了嗎？',
@@ -367,7 +367,7 @@ export const translations = {
     contact: {
       hero: {
         title: '聯繫我們',
-        subtitle: '準備好保護您的組織了嗎？讓我們討論 Avocado.ai 如何保護您的數字資產。'
+        subtitle: '準備好保護您的組織了嗎？讓我們討論 Avocado.ai 如何保護您的數位資產。'
       },
       form: {
         title: '發送消息',
@@ -415,7 +415,7 @@ export const translations = {
       },
       cta: {
         title: '準備好開始了嗎？',
-        subtitle: '加入數百家信任 Avocado.ai 的組織，保護他們的網絡安全需求。',
+        subtitle: '加入數百家信任 Avocado.ai 的組織，保護他們的網路安全需求。',
         scheduleDemo: '安排演示',
         downloadBrochure: '下載宣傳冊'
       }
@@ -425,27 +425,27 @@ export const translations = {
     careers: {
       hero: {
         title: '加入我們的團隊',
-        subtitle: '幫助我們塑造 AI 驅動網絡安全的未來。加入一個致力於保護全球數字資產的熱情專業團隊。'
+        subtitle: '幫助我們塑造 AI 驅動網路安全的未來。加入一個致力於保護全球數位資產的熱情專業團隊。'
       },
       whyJoin: {
         title: '為什麼加入 Avocado.ai？',
-        subtitle: '成為正在用人工智能革新網絡安全的團隊的一員。',
+        subtitle: '成為正在用人工智能革新網路安全的團隊的一員。',
         learning: {
-          title: '持續學習',
-          description: '獲得尖端技術和專業發展機會。'
+          title: '1️⃣ 持續創新與學習',
+          description: '在一個鼓勵實驗與快速迭代的環境中成長，持續接觸人工智能與網路安全的最前沿技術。'
         },
         culture: {
-          title: '包容文化',
-          description: '在重視多樣性和創新的協作環境中工作。'
+          title: '2️⃣ 開放與包容的合作文化',
+          description: '與來自不同背景的專業人才協作，激發跨領域創意，打造多元、開放的創新團隊。'
         },
         impact: {
-          title: '全球影響',
-          description: '通過保護全球組織免受網絡威脅來產生影響。'
+          title: '3️⃣ 實質影響力',
+          description: '參與開發全球市場的創新型 XDR 解決方案，實際推動網路安全防護的未來轉型。'
         }
       },
       openPositions: {
         title: '職位空缺',
-        subtitle: '探索加入我們不斷壯大的網絡安全專家團隊的機會。'
+        subtitle: '探索加入我們不斷壯大的網路安全專家團隊的機會。'
       },
       applyNow: '立即申請',
       cta: {
@@ -480,7 +480,7 @@ export const translations = {
     
     // Footer
     footer: {
-      description: '領先的網絡安全和 AI 公司，為企業安全和人工智能提供創新解決方案。',
+      description: '領先的網路安全和 AI 公司，為企業安全和人工智能提供創新解決方案。',
       quickLinks: '快速鏈接',
       contact: '聯繫',
       copyright: '© 2024 Avocado.ai. 保留所有權利。'

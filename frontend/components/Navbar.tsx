@@ -34,7 +34,7 @@ const Navbar = () => {
             <div className="flex items-center space-x-2">
               <Shield className="h-8 w-8 text-avocado-600" />
               <Brain className="h-8 w-8 text-cyber-600" />
-              <span className="text-xl font-bold text-gray-900">Avocado.ai</span>
+              <span className="text-xl font-bold text-gray-900">酪梨智慧</span>
             </div>
           </motion.div>
 
@@ -50,9 +50,6 @@ const Navbar = () => {
               </Link>
             ))}
             <LanguageSwitcher />
-            <button className="btn-primary">
-              {t('nav.getStarted')}
-            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -90,9 +87,6 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <button className="btn-primary w-full mt-4">
-              Get Started
-            </button>
           </div>
         </motion.div>
       )}

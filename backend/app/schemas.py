@@ -7,6 +7,13 @@ class LoginCredentials(BaseModel):
     username: str
     password: str
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
+
 # Contact schemas
 class ContactBase(BaseModel):
     name: str
@@ -36,6 +43,7 @@ class JobBase(BaseModel):
     description: str
     requirements: List[str]
     benefits: List[str]
+    tags: List[str] = []
 
 class JobCreate(JobBase):
     pass
@@ -49,6 +57,7 @@ class JobUpdate(BaseModel):
     description: Optional[str] = None
     requirements: Optional[List[str]] = None
     benefits: Optional[List[str]] = None
+    tags: Optional[List[str]] = None
     is_active: Optional[bool] = None
 
 class Job(JobBase):
@@ -68,18 +77,23 @@ class NewsBase(BaseModel):
     category: str
 
 class NewsCreate(NewsBase):
-    pass
+    published_date: Optional[datetime] = None
+    is_published: Optional[bool] = True
+    images: Optional[List[str]] = []
 
 class NewsUpdate(BaseModel):
     title: Optional[str] = None
     content: Optional[str] = None
     category: Optional[str] = None
+    published_date: Optional[datetime] = None
     is_published: Optional[bool] = None
+    images: Optional[List[str]] = None
 
 class News(NewsBase):
     id: int
     published_date: datetime
     is_published: bool
+    images: List[str]
     created_at: datetime
     updated_at: datetime
 
@@ -134,6 +148,32 @@ class ProductUpdate(BaseModel):
     is_active: Optional[bool] = None
 
 class Product(ProductBase):
+    id: int
+    is_active: bool
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+# Technique schemas
+class TechniqueBase(BaseModel):
+    name: str
+    category: str
+    description: str
+    features: List[str]
+
+class TechniqueCreate(TechniqueBase):
+    pass
+
+class TechniqueUpdate(BaseModel):
+    name: Optional[str] = None
+    category: Optional[str] = None
+    description: Optional[str] = None
+    features: Optional[List[str]] = None
+    is_active: Optional[bool] = None
+
+class Technique(TechniqueBase):
     id: int
     is_active: bool
     created_at: datetime

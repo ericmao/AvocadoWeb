@@ -8,6 +8,16 @@
   html {
     font-family: 'Inter', sans-serif;
   }
+  
+  /* Dark theme variables */
+  :root {
+    --dark-green: #0f4c3a;
+    --deep-green: #0a2e1f;
+    --purple-accent: #7c3aed;
+    --dark-purple: #4c1d95;
+    --dark-bg: #0f172a;
+    --dark-surface: #1e293b;
+  }
 }
 
 @layer components {
@@ -19,11 +29,44 @@
     @apply bg-transparent border-2 border-avocado-600 text-avocado-600 hover:bg-avocado-600 hover:text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200;
   }
   
+  .btn-dark {
+    @apply bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-purple {
+    @apply bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200;
+  }
+  
   .card {
     @apply bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-200;
   }
   
+  .card-dark {
+    @apply bg-gray-900 text-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-200;
+  }
+  
   .section-padding {
     @apply py-16 px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Dark theme utilities */
+  .bg-dark-green {
+    background-color: var(--dark-green);
+  }
+  
+  .bg-deep-green {
+    background-color: var(--deep-green);
+  }
+  
+  .bg-dark-purple {
+    background-color: var(--dark-purple);
+  }
+  
+  .text-purple-accent {
+    color: var(--purple-accent);
+  }
+  
+  .border-purple-accent {
+    border-color: var(--purple-accent);
   }
 } 
