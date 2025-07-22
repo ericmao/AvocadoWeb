@@ -34,9 +34,9 @@ export default function Techniques() {
     const fetchTechniques = async () => {
       try {
         setLoading(true)
-        console.log('Fetching techniques from:', `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/techniques/`)
+        console.log('Fetching techniques from:', `/api/techniques/`)
         
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/techniques/`, {
+        const response = await fetch('/api/techniques', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

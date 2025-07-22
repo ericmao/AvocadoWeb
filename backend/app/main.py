@@ -7,7 +7,7 @@ app = FastAPI(title="酪梨智慧 API", version="1.0.0")
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://localhost:3000"],
+    allow_origins=["*"],  # 允許所有來源，用於開發環境
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

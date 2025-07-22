@@ -169,12 +169,12 @@ export default function AdminDashboard() {
   const fetchData = async () => {
     try {
       const [jobsResponse, newsResponse, casesResponse, techniquesResponse, productsResponse, tagsResponse] = await Promise.all([
-        fetch('http://localhost:8000/api/jobs'),
-        fetch('http://localhost:8000/api/news/admin/all'), // 使用新的端點獲取所有新聞
-        fetch('http://localhost:8000/api/cases'),
-        fetch('http://localhost:8000/api/techniques'),
-        fetch('http://localhost:8000/api/products'),
-        fetch('http://localhost:8000/api/jobs/tags')
+        fetch('/api/jobs/'),
+        fetch('/api/news/admin/all'), // 使用新的端點獲取所有新聞
+        fetch('/api/cases'),
+        fetch('/api/techniques/'),
+        fetch('/api/products/'),
+        fetch('/api/jobs/tags')
       ])
       
       const jobsData = await jobsResponse.json()
@@ -316,7 +316,7 @@ export default function AdminDashboard() {
         tags: job.tags
       }
       
-      const response = await fetch(`http://localhost:8000/api/jobs/${job.id}`, {
+      const response = await fetch(`/api/jobs/${job.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(jobData)
@@ -357,7 +357,7 @@ export default function AdminDashboard() {
         tags: job.tags
       }
       
-      const response = await fetch('http://localhost:8000/api/jobs/', {
+      const response = await fetch('/api/jobs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(jobData)
@@ -400,7 +400,7 @@ export default function AdminDashboard() {
   const handleDeleteJob = async (jobId: number) => {
     if (confirm('Are you sure you want to delete this job?')) {
       try {
-        const response = await fetch(`http://localhost:8000/api/jobs/${jobId}`, {
+        const response = await fetch(`/api/jobs/${jobId}`, {
           method: 'DELETE',
         })
         
@@ -426,7 +426,7 @@ export default function AdminDashboard() {
         results: caseStudy.results
       }
       
-      const response = await fetch(`http://localhost:8000/api/cases/${caseStudy.id}`, {
+      const response = await fetch(`/api/cases/${caseStudy.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(caseData)
@@ -466,7 +466,7 @@ export default function AdminDashboard() {
       
       console.log('Sending to backend:', caseData)
       
-      const response = await fetch('http://localhost:8000/api/cases/', {
+      const response = await fetch('/api/cases', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(caseData)
@@ -507,7 +507,7 @@ export default function AdminDashboard() {
   const handleDeleteCase = async (caseId: number) => {
     if (confirm('Are you sure you want to delete this case study?')) {
       try {
-        const response = await fetch(`http://localhost:8000/api/cases/${caseId}`, {
+        const response = await fetch(`/api/cases/${caseId}`, {
           method: 'DELETE',
         })
         
@@ -543,7 +543,7 @@ export default function AdminDashboard() {
         images: newNews.images
       }
       
-      const response = await fetch('http://localhost:8000/api/news/', {
+      const response = await fetch('/api/news/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -600,7 +600,7 @@ export default function AdminDashboard() {
       
       console.log('Sending to backend:', newsData)
       
-      const response = await fetch(`http://localhost:8000/api/news/${newsItem.id}`, {
+      const response = await fetch(`/api/news/${newsItem.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -636,7 +636,7 @@ export default function AdminDashboard() {
   const handleDeleteNews = async (newsId: number) => {
     if (confirm('Are you sure you want to delete this news item?')) {
       try {
-        const response = await fetch(`http://localhost:8000/api/news/${newsId}`, {
+        const response = await fetch(`/api/news/${newsId}`, {
           method: 'DELETE',
         })
         
@@ -661,7 +661,7 @@ export default function AdminDashboard() {
         features: technique.features
       }
       
-      const response = await fetch(`http://localhost:8000/api/techniques/${technique.id}`, {
+      const response = await fetch(`/api/techniques/${technique.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(techniqueData)
@@ -697,7 +697,7 @@ export default function AdminDashboard() {
         features: technique.features
       }
       
-      const response = await fetch('http://localhost:8000/api/techniques/', {
+      const response = await fetch('/api/techniques/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(techniqueData)
@@ -734,7 +734,7 @@ export default function AdminDashboard() {
   const handleDeleteTechnique = async (techniqueId: number) => {
     if (confirm('Are you sure you want to delete this technique?')) {
       try {
-        const response = await fetch(`http://localhost:8000/api/techniques/${techniqueId}`, {
+        const response = await fetch(`/api/techniques/${techniqueId}`, {
           method: 'DELETE',
         })
         
@@ -760,7 +760,7 @@ export default function AdminDashboard() {
         price: product.price
       }
       
-      const response = await fetch(`http://localhost:8000/api/products/${product.id}`, {
+      const response = await fetch(`/api/products/${product.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(productData)
@@ -797,7 +797,7 @@ export default function AdminDashboard() {
         price: product.price
       }
       
-      const response = await fetch('http://localhost:8000/api/products/', {
+      const response = await fetch('/api/products/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(productData)
@@ -835,7 +835,7 @@ export default function AdminDashboard() {
   const handleDeleteProduct = async (productId: number) => {
     if (confirm('Are you sure you want to delete this product?')) {
       try {
-        const response = await fetch(`http://localhost:8000/api/products/${productId}`, {
+        const response = await fetch(`/api/products/${productId}`, {
           method: 'DELETE',
         })
         

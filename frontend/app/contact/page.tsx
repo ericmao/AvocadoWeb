@@ -33,7 +33,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: t('contact.contactInfo.email'),
-      details: 'info@avocado.ai',
+      details: 'rain@avocadolab.ai',
       description: 'Send us an email anytime'
     },
     {

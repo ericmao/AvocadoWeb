@@ -26,7 +26,7 @@ export default function Cases() {
 
   const fetchCaseStudies = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/cases')
+      const response = await fetch('/api/cases')
       const data = await response.json()
       setCaseStudies(data)
     } catch (error) {

@@ -29,7 +29,7 @@ export default function News() {
 
   const fetchNews = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/news')
+      const response = await fetch('/api/news')
       const data = await response.json()
       
       // 統一的日期處理函數

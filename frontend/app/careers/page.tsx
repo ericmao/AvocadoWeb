@@ -30,7 +30,7 @@ export default function Careers() {
 
   const fetchJobs = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/jobs')
+      const response = await fetch('/api/jobs')
       const data = await response.json()
       setJobs(data)
     } catch (error) {

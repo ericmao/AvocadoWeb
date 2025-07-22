@@ -17,7 +17,7 @@ export default function TestTimezonePage() {
     
     try {
       // 測試 API 調用
-      const response = await fetch('http://localhost:8000/api/news/5', {
+      const response = await fetch('/api/news/5', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

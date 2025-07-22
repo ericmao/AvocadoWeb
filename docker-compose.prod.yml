@@ -5,8 +5,6 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    environment:
-      - NEXT_PUBLIC_API_URL=https://avocado.ai/api
     networks:
       - avocado-network
 

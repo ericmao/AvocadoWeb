@@ -53,7 +53,7 @@ export default function TestDatePage() {
     addLog(`發送到後端的數據: ${JSON.stringify(testData, null, 2)}`)
     
     try {
-      const response = await fetch('http://localhost:8000/api/news/', {
+      const response = await fetch('/api/news/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ export default function TestDatePage() {
     addLog(`更新數據: ${JSON.stringify(updateData, null, 2)}`)
     
     try {
-      const response = await fetch(`http://localhost:8000/api/news/${apiResponse.id}`, {
+      const response = await fetch(`/api/news/${apiResponse.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
